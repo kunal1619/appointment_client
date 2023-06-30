@@ -19,7 +19,7 @@ import { TimePicker } from "@mui/x-date-pickers";
 import {socket} from "../utils/socket";
 import dayjs from "dayjs";
 
-
+const url = `${process.env.NODE_ENV === "development" ? "http://localhost:8080" : process.env.PROD_URI }`
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -761,8 +761,11 @@ useEffect(()=>{
   let availableSlots =  slotData.filter((elm, ind)=>
   elm.availability === true ? elm : ""
   )
+
+  // origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URI :process.env.PROD_URI
   
-  axios.post("http://localhost:8080/slot",{array : availableSlots, slotShowDate : `${year}-${month}-${date}`, busnId : 1}).then((res)=>{}).catch((err)=>{console.log(err);})
+
+  axios.post(`${url}/slot`,{array : availableSlots, slotShowDate : `${year}-${month}-${date}`, busnId : 1}).then((res)=>{}).catch((err)=>{console.log(err);})
 
   // console.log(availableSlots);
   
@@ -838,7 +841,9 @@ useEffect(()=>{
   const funAccept = () => {
     setShowAccptRej(false)
 
-axios.post("http://localhost:8080/request/accepted", {timeStamp : timeStamp ,_id : id})
+      
+
+axios.post(`${url}/request/accepted`, {timeStamp : timeStamp ,_id : id})
 
 setSlotData(slotData.map(obj => {
   if (obj.slot.toString() === timeStamp) {
@@ -859,8 +864,9 @@ setSlotData(slotData.map(obj => {
     setRecheduleText("Update")
   };
 
+      
   const funUpdate = ()=>{
-  axios.post("http://localhost:8080/request/reschedule", {timeStamp : timeStamp ,_id : id, userId : '1', docId : 1, updatedTimeSlot : updatedTime})
+  axios.post(`${url}/request/reschedule`, {timeStamp : timeStamp ,_id : id, userId : '1', docId : 1, updatedTimeSlot : updatedTime})
 
   setSlotData(slotData.map(obj => {
     if (obj.slot.toString() === timeStamp) {
@@ -874,8 +880,10 @@ setSlotData(slotData.map(obj => {
   }
 
   const funReject = () => {
+
+    
   
-    axios.post("http://localhost:8080/request/rejected", {timeStamp : timeStamp ,_id : id})
+    axios.post(`${url}/request/rejected`, {timeStamp : timeStamp ,_id : id})
 
     setSlotData(slotData.map(obj => {
       if (obj.slot.toString() === timeStamp) {

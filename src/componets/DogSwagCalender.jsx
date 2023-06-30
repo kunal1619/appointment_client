@@ -17,7 +17,7 @@ const DogSwagCalender = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   
-
+  const url = `${process.env.NODE_ENV === "development" ? "http://localhost:8080" : process.env.PROD_URI }`
 
   const serviceData = {
     'groomer' : ['abc', 'xyz', 'dkd', 'dkfk'],
@@ -332,8 +332,10 @@ const [showYear, setShowYear] = useState(null)
  const handledDataSend = ()=>{
   setShowNotification(false)
 
+    
+
   // ------------------------
-  axios.post("http://localhost:8080/request", formData).then((res)=>{}).catch((err)=> console.log(err))
+  axios.post(`${url}/request`, formData).then((res)=>{}).catch((err)=> console.log(err))
 
    setSlotData(slotData.map(obj => {
     if (obj.slot === slotNumber) {
@@ -352,14 +354,15 @@ const [showYear, setShowYear] = useState(null)
   setSlotNum(index)
   setShowAccptRej(!showAcptRejct)
  }
-
+ 
  const funAccept = ()=>{
-  axios.post("http://localhost:8080/slot/acc", {obj : slotNum})
+  axios.post(`${url}/slot/acc`, {obj : slotNum})
 
   setShowAccptRej(false)
  }
+ 
  const funReject = ()=>{
-  axios.post("http://localhost:8080/slot/rej", {obj : slotNum})
+  axios.post(`${url}/slot/rej`, {obj : slotNum})
   setShowAccptRej(false)
  }
 
