@@ -19,7 +19,7 @@ import { TimePicker } from "@mui/x-date-pickers";
 import {socket} from "../utils/socket";
 import dayjs from "dayjs";
 
-const url = `${process.env.NODE_ENV === "development" ? "http://localhost:8080" : process.env.PROD_URI }`
+const url = "https://dogswag-api.onrender.com"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

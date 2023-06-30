@@ -17,7 +17,7 @@ const DogSwagCalender = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   
-  const url = `${process.env.NODE_ENV === "development" ? "http://localhost:8080" : process.env.PROD_URI }`
+  const url = "https://dogswag-api.onrender.com"
 
   const serviceData = {
     'groomer' : ['abc', 'xyz', 'dkd', 'dkfk'],
