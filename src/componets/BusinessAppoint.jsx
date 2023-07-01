@@ -764,8 +764,9 @@ useEffect(()=>{
 
   // origin: process.env.NODE_ENV === 'development' ? process.env.DEV_URI :process.env.PROD_URI
   
-
-  axios.post(`${url}/slot`,{array : availableSlots, slotShowDate : `${year}-${month}-${date}`, busnId : 1}).then((res)=>{}).catch((err)=>{console.log(err);})
+  // , slotShowDate : `${year}-${month}-${date}`, busnId : 1
+  
+  axios.post(`${url}/slot`,{array : availableSlots}).then((res)=>{}).catch((err)=>{console.log(err);})
 
   // console.log(availableSlots);
   
