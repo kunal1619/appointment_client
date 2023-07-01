@@ -90,7 +90,7 @@ const [showYear, setShowYear] = useState(null)
     socket.on('timeSlot', (onConnect)=>{
   
       setSlotData(onConnect['dataArray'])
-  
+    //  console.log(onConnect);
     });
   
     // --------------socket end----------
@@ -101,6 +101,7 @@ const [showYear, setShowYear] = useState(null)
   const totalPage = 31;
   const [listTag, setListTag] = useState('');
   const [date, SetDate] = useState(dayjs(''));
+  
   const [time, setTime] = useState('')
 //   const [month, setMonth] = useState(6)
 //   const [pickeDate, setPickedDate] = useState(null);
@@ -661,7 +662,9 @@ const [showYear, setShowYear] = useState(null)
 
   return(
     <div className='relative  py-[10px] px-2 list-none font-medium tracking-wider text-[#5a84a2] sm:text-base text-sm rounded-[40px] neoSlot hover:scale-100 flex justify-center space-x-2 items-center' key={index} >
-<span onClick={()=>showModalFunction( elm.timeStart, elm.startMeridian,elm.timeEnd, elm.endMeridian, elm.slot)}>{elm.timeStart}{elm.startMeridian} - {elm.timeEnd}{elm.endMeridian}</span>
+<span onClick={()=>showModalFunction( elm.timeStart, elm.startMeridian,elm.timeEnd, elm.endMeridian, elm.slot)}>
+{elm.timeStart}{elm.startMeridian} - {elm.timeEnd}{elm.endMeridian}
+</span>
 
 <div id="animation">
 <div data-tooltip={`${elm.status === "notBooked" ? "click to book" : elm.status === "pending" ? "Your appointment is in pending you will be notifies once Shop Name will confirm" : elm.status === "booked" ? "Congratulatins, your appointment is accepted by Shop Name, You can re-schedule or cancel if needed." : elm.status === "resheduled"? "your appointment is rescheduled by Shop name, Click on to accept": elm.status === "cancel" ? "your appointment is canceled by Shop name , please book any other slot.":""}`}  className={`${elm.status === "notBooked" ? "": elm.status === "pending" ? "tooltip h-4 w-4 bg-gray-600" : elm.status === "booked" ? "tooltip h-4 w-4 bg-green-600" : elm.status === "reshedule" ? "tooltip h-4 w-4 bg-yellow-500": elm.status === "cancel" ? "tooltip h-4 w-4 bg-red-600":""}  rounded-full`} onClick={()=>handleAcptRjct(elm.slot)}></div>
@@ -684,7 +687,7 @@ const [showYear, setShowYear] = useState(null)
 <div className="w-full top-0 bg-gray-300 flex justify-center items-center">
 <div className={`popup bg-[#d2ac03] rounded-md   text-center pt-0 px-7 pb-7 text-[#333]   sm:w-[400px] w-[340px]  duration-500 text-3xl font-medium mt-7 mb-3 ${open1 ? "open-popup ": ""}`}>
 <img className='imgCheckout mx-auto w-24 h-24 -mt-[50px] rounded-full shadow-md bg-[#fff]' src="/img/svg3.svg"/>
-<h2 className='text-white text-lg'>Your selected time slot is <br /> <span className='text-gray-200 mr-3'>{date}</span> <span className='text-blue-800 font-semibold'>{time}</span></h2>
+<h2 className='text-white text-lg'>Your selected time slot is <br /> <span className='text-gray-200 mr-3'>{`${showYear}-${showMonth}-${showDate}`}</span> <span className='text-blue-800 font-semibold'>{time}</span></h2>
 {/* <p className='text-gray-700 text-lg font-semibold '> A.K. Pet care</p> */}
 <p className='text-gray-700 text-lg font-semibold '>Category - <span className='font-semibold text-gray-200 capitalize'>{types}</span></p>
 
